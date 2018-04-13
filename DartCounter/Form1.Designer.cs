@@ -1,4 +1,6 @@
-﻿namespace DartCounter
+﻿using System.Windows.Forms;
+
+namespace DartCounter
 {
     partial class Form1
     {
@@ -26,15 +28,79 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private async void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savedGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.singlePlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.twoPlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem,
+            this.savedGamesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1046, 28);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.singlePlayerToolStripMenuItem,
+            this.twoPlayersToolStripMenuItem});
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            // 
+            // savedGamesToolStripMenuItem
+            // 
+            this.savedGamesToolStripMenuItem.Name = "savedGamesToolStripMenuItem";
+            this.savedGamesToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
+            this.savedGamesToolStripMenuItem.Text = "Saved Games";
+            // 
+            // singlePlayerToolStripMenuItem
+            // 
+            this.singlePlayerToolStripMenuItem.Name = "singlePlayerToolStripMenuItem";
+            this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.singlePlayerToolStripMenuItem.Text = "Single Player";
+            // 
+            // twoPlayersToolStripMenuItem
+            // 
+            this.twoPlayersToolStripMenuItem.Name = "twoPlayersToolStripMenuItem";
+            this.twoPlayersToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.twoPlayersToolStripMenuItem.Text = "Two Players";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1046, 519);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Form1";
+            this.Text = "Hello";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem newGameToolStripMenuItem;
+        private ToolStripMenuItem savedGamesToolStripMenuItem;
+        private ToolStripMenuItem singlePlayerToolStripMenuItem;
+        private ToolStripMenuItem twoPlayersToolStripMenuItem;
     }
 }
 
