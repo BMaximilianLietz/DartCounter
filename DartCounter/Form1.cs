@@ -16,5 +16,10 @@ namespace DartCounter
         {
             InitializeComponent();
         }
+
+        private void singlePlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

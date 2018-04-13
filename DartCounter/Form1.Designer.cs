@@ -32,9 +32,9 @@ namespace DartCounter
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.savedGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singlePlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twoPlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savedGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,23 +59,24 @@ namespace DartCounter
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.newGameToolStripMenuItem.Text = "New Game";
             // 
-            // savedGamesToolStripMenuItem
-            // 
-            this.savedGamesToolStripMenuItem.Name = "savedGamesToolStripMenuItem";
-            this.savedGamesToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
-            this.savedGamesToolStripMenuItem.Text = "Saved Games";
-            // 
             // singlePlayerToolStripMenuItem
             // 
             this.singlePlayerToolStripMenuItem.Name = "singlePlayerToolStripMenuItem";
             this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.singlePlayerToolStripMenuItem.Text = "Single Player";
+            this.singlePlayerToolStripMenuItem.Click += new System.EventHandler(this.singlePlayerToolStripMenuItem_Click);
             // 
             // twoPlayersToolStripMenuItem
             // 
             this.twoPlayersToolStripMenuItem.Name = "twoPlayersToolStripMenuItem";
             this.twoPlayersToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.twoPlayersToolStripMenuItem.Text = "Two Players";
+            // 
+            // savedGamesToolStripMenuItem
+            // 
+            this.savedGamesToolStripMenuItem.Name = "savedGamesToolStripMenuItem";
+            this.savedGamesToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
+            this.savedGamesToolStripMenuItem.Text = "Saved Games";
             // 
             // Form1
             // 
