@@ -62,14 +62,14 @@ namespace DartCounter
             // singlePlayerToolStripMenuItem
             // 
             this.singlePlayerToolStripMenuItem.Name = "singlePlayerToolStripMenuItem";
-            this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.singlePlayerToolStripMenuItem.Text = "Single Player";
             this.singlePlayerToolStripMenuItem.Click += new System.EventHandler(this.singlePlayerToolStripMenuItem_Click);
             // 
             // twoPlayersToolStripMenuItem
             // 
             this.twoPlayersToolStripMenuItem.Name = "twoPlayersToolStripMenuItem";
-            this.twoPlayersToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.twoPlayersToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.twoPlayersToolStripMenuItem.Text = "Two Players";
             // 
             // savedGamesToolStripMenuItem
@@ -88,6 +88,7 @@ namespace DartCounter
             this.Name = "Form1";
             this.Text = "Hello";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
