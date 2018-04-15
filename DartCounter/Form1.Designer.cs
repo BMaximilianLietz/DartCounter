@@ -35,6 +35,9 @@ namespace DartCounter
             this.singlePlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twoPlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.savedGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speechOutput = new System.Windows.Forms.TextBox();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,8 +64,11 @@ namespace DartCounter
             // 
             // singlePlayerToolStripMenuItem
             // 
+            this.singlePlayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
             this.singlePlayerToolStripMenuItem.Name = "singlePlayerToolStripMenuItem";
-            this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.singlePlayerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.singlePlayerToolStripMenuItem.Text = "Single Player";
             this.singlePlayerToolStripMenuItem.Click += new System.EventHandler(this.singlePlayerToolStripMenuItem_Click);
             // 
@@ -78,11 +84,31 @@ namespace DartCounter
             this.savedGamesToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
             this.savedGamesToolStripMenuItem.Text = "Saved Games";
             // 
+            // speechOutput
+            // 
+            this.speechOutput.Location = new System.Drawing.Point(699, 78);
+            this.speechOutput.Name = "speechOutput";
+            this.speechOutput.Size = new System.Drawing.Size(281, 22);
+            this.speechOutput.TabIndex = 1;
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem2.Text = "301";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem3.Text = "501";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 519);
+            this.Controls.Add(this.speechOutput);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -103,6 +129,9 @@ namespace DartCounter
         private ToolStripMenuItem savedGamesToolStripMenuItem;
         private ToolStripMenuItem singlePlayerToolStripMenuItem;
         private ToolStripMenuItem twoPlayersToolStripMenuItem;
+        private TextBox speechOutput;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripMenuItem toolStripMenuItem3;
     }
 }
 
