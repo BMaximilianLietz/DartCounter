@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech;
 using System.Speech.Recognition;
+using System.Speech.Synthesis;
 
 namespace DartCounter
 {
@@ -24,8 +25,53 @@ namespace DartCounter
         Button submit = new Button();
         Button btn2 = new Button();
 
+        Boolean isHundred = false;
         Boolean gameOverFlag = false;
+        Boolean newGameFlag = false;
+        Boolean singleplayerFlag = false;
+        Boolean multiplayerFlag = false;
+        Boolean savedGameFlag = false;
 
+        private static Dictionary<string, int> numberTable = new Dictionary<string, int>
+                {{"zero",0},{"one",1},{"two",2},{"three",3},{"four",4},
+                {"five",5},{"six",6},{"seven",7},{"eight",8},{"nine",9},
+                {"ten",10},{"eleven",11},{"twelve",12},{"thirteen",13},
+                {"fourteen",14},{"fifteen",15},{"sixteen",16},
+                {"seventeen",17},{"eighteen",18},{"nineteen",19},
+
+                { "twenty",20}, {"twenty one", 21}, {"twenty two", 22}, {"twenty three", 23},
+                { "twenty four", 24}, {"twenty five", 25}, {"twenty six", 26}, {"twenty seven", 27},
+                { "twenty eight", 28}, {"twenty nine", 29},
+
+                { "thirty",30}, {"thirty one", 31}, {"thirty two", 32}, {"thirty three", 33},
+                { "thirty four", 34}, {"thirty five", 35}, {"thirty six", 36}, {"thirty seven", 37},
+                { "thirty eight", 38}, {"thirty nine", 39},
+
+                { "forty",40}, {"forty one", 41}, {"forty two", 42}, {"forty three", 43},
+                { "forty four", 44}, {"forty five", 45}, {"forty six", 46}, {"forty seven", 47},
+                { "forty eight", 48}, {"forty nine", 49},
+
+                { "fifty",50}, {"fifty one", 51}, {"fifty two", 52}, {"fifty three", 53},
+                { "fifty four", 54}, {"fifty five", 55}, {"fifty six", 56}, {"fifty seven", 57},
+                { "fifty eight", 58}, {"fifty nine", 59},
+
+                { "sixty",60}, {"sixty one", 61}, {"sixty two", 62}, {"sixty three", 63},
+                { "sixty four", 64}, {"sixty five", 65}, {"sixty six", 66}, {"sixty seven", 67},
+                { "sixty eight", 68}, {"sixty nine", 69},
+
+                { "seventy",70}, {"seventy one", 71}, {"seventy two", 72}, {"seventy three", 73},
+                { "seventy four", 74}, {"seventy five", 75}, {"seventy six", 76}, {"seventy seven", 77},
+                { "seventy eight", 78}, {"seventy nine", 79},
+
+                { "eighty",80}, {"eighty one", 81}, {"eighty two", 82}, {"eighty three", 83},
+                { "eighty four", 84}, {"eighty five", 85}, {"eighty six", 86}, {"eighty seven", 87},
+                { "eighty eight", 88}, {"eighty nine", 89},
+
+                { "ninety",90}, {"ninety one", 91}, {"ninety two", 92}, {"ninety three", 93},
+                { "ninety four", 99}, {"ninety five", 95}, {"ninety six", 96}, {"ninety seven", 97},
+                { "ninety eight", 98}, {"ninety nine", 99},
+
+                { "hundred",100} };
 
         public Form1()
         {
@@ -34,6 +80,10 @@ namespace DartCounter
 
         private void singlePlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // getting score to get (501 or 301)
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            int score = (int) menuItem.Tag;
+
             this.scoreCounter.Location = new System.Drawing.Point((int) (this.Width*0.1), 
                 (int)(this.Height * 0.1));
             this.scoreCounter.Size = new System.Drawing.Size((int)(this.Width * 0.4),
@@ -72,7 +122,6 @@ namespace DartCounter
             this.enterScore.Name = "enterScore";
             this.enterScore.Size = new System.Drawing.Size(100, 22);
             this.enterScore.TabIndex = 1;
-            this.enterScore.TextChanged += EnterScore_TextChanged;
 
             // 
             // submit button
@@ -100,7 +149,7 @@ namespace DartCounter
             // score label
             // 
             this.scoreLabel.AutoSize = true;
-            this.scoreLabel.Text = "301";
+            this.scoreLabel.Text = score.ToString();
             this.scoreLabel.Location = new System.Drawing.Point(65, 0);
             this.scoreLabel.Size = new System.Drawing.Size(65, 15);
             this.scoreLabel.Name = "scoreLabel";
@@ -117,37 +166,6 @@ namespace DartCounter
             this.ActiveControl = enterScore;
         }
 
-        private void EnterScore_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int buffer = Convert.ToInt16(enterScore.Text);
-                if (buffer.ToString().Length == 1)
-                {
-                    newEntry((buffer).ToString());
-                }
-                else if (buffer.ToString().Length == 2)
-                {
-                    int firsletter = Convert.ToInt16(buffer.ToString()[0].ToString());
-                    newEntry((buffer-firsletter).ToString());
-                    MessageBox.Show(firsletter.ToString());
-                } else if (buffer.ToString().Length == 3)
-                {
-                    int firsletter = Convert.ToInt32(buffer.ToString()[0]);
-                    int secondletter = Convert.ToInt32(buffer.ToString()[1]);
-                    newEntry((buffer - firsletter - secondletter).ToString());
-                } else
-                {
-                    MessageBox.Show("don't cheat mate");
-                }
-
-            } catch
-            {
-
-            }
-            newEntry(enterScore.Text);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // Create a new SpeechRecognitionEngine instance
@@ -159,24 +177,71 @@ namespace DartCounter
 
         void sr_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            MessageBox.Show(e.Result.Text);
-            //enterScore.Text = e.Result.Text;
-            /*
-            int buffer2 = Convert.ToInt16(e.Result.Text);
-            newEntry(buffer2.ToString());
-            if (e.Result.Text.Equals("New Game Single Player")) {
-                singlePlayerToolStripMenuItem_Click(singlePlayerToolStripMenuItem, e);
+            if (e.Result.Text.Equals("New Game"))
+            {
+                newGameToolStripMenuItem.DropDown.Show();
+                newGameFlag = true;
             }
-            try
+            if (e.Result.Text.Equals("Single Player") )
             {
-                MessageBox.Show("something was tried");
-                int buffer = Convert.ToInt16(e.Result.Text);
-                newEntry(buffer.ToString());
-            } catch
+                singlePlayerToolStripMenuItem.DropDown.Show();
+                singleplayerFlag = true;
+                newGameFlag = false;
+            }
+            if (e.Result.Text.Equals("301") && singleplayerFlag)
             {
+                newGameToolStripMenuItem.HideDropDown();
+                singleplayerFlag = false;
+                singlePlayerToolStripMenuItem_Click(toolStripMenuItem2, e);
+            }
+            if (e.Result.Text.Equals("501") && singleplayerFlag)
+            {
+                newGameToolStripMenuItem.HideDropDown();
+                singleplayerFlag = false;
+                singlePlayerToolStripMenuItem_Click(toolStripMenuItem2, e);
+            }
+            if (e.Result.Text.Equals("hundred"))
+            {
+                isHundred = true;
+                return;
+            }
+            if (e.Result.Text.Equals("Clear Game"))
+            {
+                this.Controls.Clear();
+                InitializeComponent();
+            }
+            if (e.Result.Text.Equals("Is Richard Gay"))
+            {
+                // Initialize a new instance of the SpeechSynthesizer.
+                SpeechSynthesizer synth = new SpeechSynthesizer();
+
+                // Select a voice that matches a specific gender.  
+                synth.SelectVoiceByHints(VoiceGender.Female);
+                synth.SpeakAsync("He is the gayest gay");
 
             }
-            */
+            if (numberTable.ContainsKey(e.Result.Text) && !gameOverFlag){
+                if (e.Result.Text.Equals("hundred"))
+                {
+                    isHundred = true;
+                    return;
+                }
+
+                if (!isHundred)
+                {
+                    newEntry(numberTable[e.Result.Text].ToString());
+                } else
+                {
+                    if (e.Result.Text.Equals("hundred") && isHundred)
+                    {
+                        MessageBox.Show("WTF are you doing");
+                    } else
+                    {
+                        isHundred = false;
+                        newEntry((numberTable[e.Result.Text] + 100).ToString());
+                    }
+                }
+            } 
         }
 
 
@@ -188,7 +253,12 @@ namespace DartCounter
         private Grammar createGrammar()
         {
             Choices phrases = new Choices();
-            phrases.Add(new string[] { "New Game Single Player" });
+            phrases.Add(new string[] { "New Game", "Single Player", "301", "501", "Is Richard Gay",
+            "Clear Game"});
+            foreach (string element in initNumbers())
+            {
+                phrases.Add(element);
+            }
 
             GrammarBuilder gb = new GrammarBuilder();
             gb.Append(phrases);
@@ -257,8 +327,8 @@ namespace DartCounter
 
         private void newEntry(string throwValue)
         {
-            try
-            {
+            //try
+            //{
                 Label bufferLabel = new Label();
                 bufferLabel.Text = throwValue;
                 bufferLabel.AutoSize = true;
@@ -266,19 +336,25 @@ namespace DartCounter
                 this.scoreCounter.Controls.Add(bufferLabel);
 
                 scoreLabel.Text = scoreSubtract(scoreLabel.Text,
-                    enterScore.Text);
-            }
-            catch
+                    throwValue);
+            //}
+            /*catch (Exception ex)
             {
-                Debug.WriteLine("there was an error");
+                MessageBox.Show(ex.ToString());
+                //Debug.WriteLine("there was an error");
             }
+            */
         }
 
-        private void initNumbers()
+        
+        private List<string> initNumbers()
         {
-            
-
-            //(new string[] { "New Game Single Player" });
+            List<string> buffer = new List<string>();
+            foreach (KeyValuePair<string, int> element in numberTable)
+            {
+                buffer.Add(element.Key);
+            }
+            return buffer;
         }
     }
 }
